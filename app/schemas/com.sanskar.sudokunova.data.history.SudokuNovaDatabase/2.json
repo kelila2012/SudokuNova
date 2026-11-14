@@ -1,0 +1,316 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "ad9390a9a1602b190458f48565df6e15",
+    "entities": [
+      {
+        "tableName": "game_history",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `puzzle` TEXT NOT NULL, `solution` TEXT NOT NULL, `difficulty` TEXT NOT NULL, `completed` INTEGER NOT NULL, `elapsedSeconds` INTEGER NOT NULL, `mistakes` INTEGER NOT NULL, `hintsUsed` INTEGER NOT NULL, `startedAtEpochMillis` INTEGER NOT NULL, `completedAtEpochMillis` INTEGER, `isDailyChallenge` INTEGER NOT NULL, `isPerfect` INTEGER NOT NULL, `isFavorite` INTEGER NOT NULL, `replayOfHistoryId` INTEGER)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "puzzle",
+            "columnName": "puzzle",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "solution",
+            "columnName": "solution",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "difficulty",
+            "columnName": "difficulty",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "completed",
+            "columnName": "completed",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "elapsedSeconds",
+            "columnName": "elapsedSeconds",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mistakes",
+            "columnName": "mistakes",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "hintsUsed",
+            "columnName": "hintsUsed",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "startedAtEpochMillis",
+            "columnName": "startedAtEpochMillis",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "completedAtEpochMillis",
+            "columnName": "completedAtEpochMillis",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "isDailyChallenge",
+            "columnName": "isDailyChallenge",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isPerfect",
+            "columnName": "isPerfect",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isFavorite",
+            "columnName": "isFavorite",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "replayOfHistoryId",
+            "columnName": "replayOfHistoryId",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_game_history_difficulty",
+            "unique": false,
+            "columnNames": [
+              "difficulty"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_game_history_difficulty` ON `${TABLE_NAME}` (`difficulty`)"
+          },
+          {
+            "name": "index_game_history_completedAtEpochMillis",
+            "unique": false,
+            "columnNames": [
+              "completedAtEpochMillis"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_game_history_completedAtEpochMillis` ON `${TABLE_NAME}` (`completedAtEpochMillis`)"
+          },
+          {
+            "name": "index_game_history_isFavorite",
+            "unique": false,
+            "columnNames": [
+              "isFavorite"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_game_history_isFavorite` ON `${TABLE_NAME}` (`isFavorite`)"
+          }
+        ]
+      },
+      {
+        "tableName": "saved_puzzles",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `puzzle` TEXT NOT NULL, `solution` TEXT, `title` TEXT, `difficulty` TEXT NOT NULL, `source` TEXT NOT NULL, `createdAtEpochMillis` INTEGER NOT NULL, `isFavorite` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "puzzle",
+            "columnName": "puzzle",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "solution",
+            "columnName": "solution",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "difficulty",
+            "columnName": "difficulty",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "source",
+            "columnName": "source",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdAtEpochMillis",
+            "columnName": "createdAtEpochMillis",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isFavorite",
+            "columnName": "isFavorite",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_saved_puzzles_puzzle",
+            "unique": true,
+            "columnNames": [
+              "puzzle"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_saved_puzzles_puzzle` ON `${TABLE_NAME}` (`puzzle`)"
+          },
+          {
+            "name": "index_saved_puzzles_difficulty",
+            "unique": false,
+            "columnNames": [
+              "difficulty"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_saved_puzzles_difficulty` ON `${TABLE_NAME}` (`difficulty`)"
+          },
+          {
+            "name": "index_saved_puzzles_isFavorite",
+            "unique": false,
+            "columnNames": [
+              "isFavorite"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_saved_puzzles_isFavorite` ON `${TABLE_NAME}` (`isFavorite`)"
+          }
+        ]
+      },
+      {
+        "tableName": "challenge_results",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `challengeType` TEXT NOT NULL, `challengeKey` INTEGER NOT NULL, `difficulty` TEXT NOT NULL, `puzzle` TEXT NOT NULL, `elapsedSeconds` INTEGER NOT NULL, `mistakes` INTEGER NOT NULL, `hintsUsed` INTEGER NOT NULL, `completedAtEpochMillis` INTEGER NOT NULL, `perfect` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "challengeType",
+            "columnName": "challengeType",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "challengeKey",
+            "columnName": "challengeKey",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "difficulty",
+            "columnName": "difficulty",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "puzzle",
+            "columnName": "puzzle",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "elapsedSeconds",
+            "columnName": "elapsedSeconds",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mistakes",
+            "columnName": "mistakes",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "hintsUsed",
+            "columnName": "hintsUsed",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "completedAtEpochMillis",
+            "columnName": "completedAtEpochMillis",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "perfect",
+            "columnName": "perfect",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_challenge_results_challengeType_challengeKey",
+            "unique": true,
+            "columnNames": [
+              "challengeType",
+              "challengeKey"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_challenge_results_challengeType_challengeKey` ON `${TABLE_NAME}` (`challengeType`, `challengeKey`)"
+          },
+          {
+            "name": "index_challenge_results_completedAtEpochMillis",
+            "unique": false,
+            "columnNames": [
+              "completedAtEpochMillis"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_challenge_results_completedAtEpochMillis` ON `${TABLE_NAME}` (`completedAtEpochMillis`)"
+          }
+        ]
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ad9390a9a1602b190458f48565df6e15')"
+    ]
+  }
+}
